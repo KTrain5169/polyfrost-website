@@ -11,7 +11,7 @@ import unocss from 'unocss/astro';
 export default defineConfig({
 	site: 'https://polyfrost.org',
 	adapter: cloudflare(),
-	output: 'hybrid',
+	output: 'static', // the current approach in the files means it should build to static by default
 	integrations: [
 		unocss({
 			injectReset: true,
@@ -29,11 +29,11 @@ export default defineConfig({
 		ssr: { noExternal: ['smartypants'] },
 	},
 	experimental: {
-		contentIntellisense: true,
-		env: {
-			schema: {
-				GITHUB_PAT: envField.string({ context: 'server', access: 'public', optional: true }),
-			},
+		contentIntellisense: true
+	},
+	env: {
+		schema: {
+			GITHUB_PAT: envField.string({ context: 'server', access: 'public', optional: true }),
 		},
 	},
 });
